@@ -1,19 +1,15 @@
-const mongoose = require("mongoose")
-
-mongoose.connect(process.env.MONGO_URI)
-    .then(() => console.log("MongoDB connected"))
-    .catch(err => console.error("MongoDB connection error:", err));
+const mongoose = require("mongoose");
 
 const projectSchema = new mongoose.Schema({
-    title: String,
-    createdBy: String,
-    date: {
-        type: Date,
-        default: Date.now
-    },
-    htmlCode: {
-        type: String,
-        default: `
+  title: String,
+  createdBy: String,
+  date: {
+    type: Date,
+    default: Date.now,
+  },
+  htmlCode: {
+    type: String,
+    default: `
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -26,21 +22,21 @@ const projectSchema = new mongoose.Schema({
     
     </body>
     <script type="module" src="/src/main.jsx"></script>
-    </html>`
-    },
-    cssCode: {
-        type: String,
-        default: `
+    </html>`,
+  },
+  cssCode: {
+    type: String,
+    default: `
     body{
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-    }`
-    },
-    jsCode: {
-        type: String,
-        default: 'console.log("Hello World")'
-    }
+    }`,
+  },
+  jsCode: {
+    type: String,
+    default: 'console.log("Hello World")',
+  },
 });
 
 module.exports = mongoose.model("Project", projectSchema);

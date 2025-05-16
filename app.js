@@ -5,12 +5,13 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
 var mongoose = require('mongoose'); 
-
+const connectDB = require("./connect");
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 const app = express();
 
+connectDB();
 // Connect to MongoDB
 
 const MONGODB_URI = 'mongodb://localhost:27017/codeIDE';
