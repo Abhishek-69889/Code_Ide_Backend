@@ -4,7 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
-var mongoose = require('mongoose'); 
+require('dotenv').config();
 const connectDB = require("./connect");
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -12,14 +12,6 @@ var usersRouter = require('./routes/users');
 const app = express();
 
 connectDB();
-// Connect to MongoDB
-
-const MONGODB_URI = 'mongodb://localhost:27017/codeIDE';
-mongoose.connect(MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-}).then(() => console.log('MongoDB connected'))
-  .catch(err => console.error('MongoDB connection error:', err));
 
 // view engine setup
 
