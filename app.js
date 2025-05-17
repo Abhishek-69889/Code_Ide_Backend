@@ -31,15 +31,25 @@ const allowedOrigins = [
   'https://codexa-doa2zsajd-abhishek-tiwaris-projects-53c4c16e.vercel.app'
 ];
 
+// Set CORS headers manually for credentials
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+  }
+  next();
+});
+
+// Enable CORS
 app.use(cors({
-  origin: function(origin, callback) {
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.includes(origin)) {
-      return callback(null, true);
-    } else {
-      return callback(new Error('Not allowed by CORS'), false);
-    }
-  },
+  origin: allowedOrigins,
+  credentials: true,
+}));
+
+// Handle preflight (OPTIONS) requests
+app.options('*', cors({
+  origin: allowedOrigins,
   credentials: true,
 }));
 
